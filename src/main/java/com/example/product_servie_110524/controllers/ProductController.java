@@ -27,7 +27,6 @@ public class ProductController {
          productRequestDto.getImage(),
          productRequestDto.getCategory(),
          productRequestDto.getPrice()
-
        );
 
     }
