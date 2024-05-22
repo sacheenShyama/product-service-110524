@@ -17,4 +17,18 @@ public interface ProductService {
             String category,
             double price);
     public Product deleteProduct(Long productId) throws ProductNotFoundException;
+
+    public Product updateProduct(Long productId,
+                                 String title,
+                                 String description,
+                                 String imageUrl,
+                                 String category,
+                                 double price) throws ProductNotFoundException;
+
+    public Product replaceProduct(Long productId,
+                                  String title,
+                                  String description,
+                                  String imageUrl,
+                                  String category,
+                                  double price) throws ProductNotFoundException;
 }
