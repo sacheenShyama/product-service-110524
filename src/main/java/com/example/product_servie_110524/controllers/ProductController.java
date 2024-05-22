@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ProductResponseDto getProductDetails(@PathVariable("id") int productId) throws ProductNotFoundException {
+    public ProductResponseDto getProductDetails(@PathVariable("id")Long productId) throws ProductNotFoundException {
             Product product = productService.getSingleProduct(productId);
             return convertToProductResponseDto(product);
         };
@@ -54,6 +54,16 @@ public class ProductController {
         ProductResponseDto productResponseDto = convertToProductResponseDto(product);
         return new ResponseEntity<>(productResponseDto, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<ProductResponseDto> deleteProduct(@PathVariable("id") Long productId)
+            throws ProductNotFoundException {
+        Product product = productService.deleteProduct(productId);
+        ProductResponseDto productResponseDto = convertToProductResponseDto(product);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
+    }
+
+
 
     private ProductResponseDto convertToProductResponseDto(Product product){
         String categoryTitle = product.getCategory().getTitle();
