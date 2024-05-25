@@ -70,12 +70,20 @@ public class FakeStoreProductService implements ProductService{
     }
 
     public Product deleteProduct(Long productId) throws ProductNotFoundException {
-        FakeStoreDto fakeStoreDto = restTemplate.exchange(
+
+        ResponseEntity<FakeStoreDto> responseEntity = restTemplate.exchange(
                 "http://fakestoreapi.com/products/" + productId,
                 HttpMethod.DELETE,
-                null,
+        null,
                 FakeStoreDto.class
-        ).getBody();
+        );
+        FakeStoreDto fakeStoreDto = responseEntity.getBody();
+//        FakeStoreDto fakeStoreDto = restTemplate.exchange(
+//                "http://fakestoreapi.com/products/" + productId,
+//                HttpMethod.DELETE,
+//                null,
+//                FakeStoreDto.class
+//        ).getBody();
 
         if (fakeStoreDto == null) {
             throw new ProductNotFoundException(
